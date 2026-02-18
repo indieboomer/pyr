@@ -8,10 +8,7 @@ Instead of trying to solve everything with raw LLM reasoning, PYR builds softwar
 
 ## Core Idea
 
-LLMs should not be best at doing tasks.
-
-They should be best at building tools that do tasks better than the LLM itself.
-
+LLMs should not be best at doing tasks. They should be best at building tools that do tasks better than the LLM itself.
 PYR treats tool creation as a first-class cognitive ability.
 
 ---
