@@ -1,7 +1,8 @@
 <p align="center">
   <img src="pyr_icon.png" alt="PYR logo" width="160"/>
 </p>
-# PYR
+
+## PYR
 
 PYR is a self-evolving toolcraft engine.
 
