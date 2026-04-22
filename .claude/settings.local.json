@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(PYTHONIOENCODING=utf-8 python *)",
+      "PowerShell($scriptsPath = \"C:\\\\Users\\\\PC\\\\AppData\\\\Local\\\\Packages\\\\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\\\\LocalCache\\\\local-packages\\\\Python310\\\\Scripts\"; [Environment]::SetEnvironmentVariable\\(\"Path\", [Environment]::GetEnvironmentVariable\\(\"Path\", \"User\"\\) + \";$scriptsPath\", \"User\"\\); Write-Host \"Done. Restart your terminal and run: pyr --help\")",
+      "Bash(claude *)",
+      "Bash(echo \"EXIT: $?\")"
+    ]
+  }
+}

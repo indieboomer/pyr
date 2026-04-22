@@ -1,0 +1,842 @@
+{
+  "title": "Echoes of Ashford High",
+  "description": "A high school romance with a hidden mystery and multiple endings.",
+  "author": "PYR Demo",
+  "version": "1.0",
+  "start_scene": "intro",
+  "scenes": {
+    "intro": {
+      "id": "intro",
+      "title": "First Day",
+      "background": "school_entrance",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Ashford High. New school, new start. You clutch your schedule and step through the front gates.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "A girl collides with you, sending her books flying. She looks up — eyes wide, cheeks flushed.",
+          "portrait_mood": null
+        },
+        {
+          "character": "mia",
+          "text": "Oh! I'm so sorry — I wasn't watching where I was going. Are you new here?",
+          "portrait_mood": "surprised"
+        }
+      ],
+      "choices": [
+        {
+          "id": "help_mia",
+          "text": "Help her pick up the books",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 10, "character": "mia"},
+            {"type": "set_flag", "target": "helped_mia", "value": null}
+          ],
+          "next_scene": "hallway_chat"
+        },
+        {
+          "id": "ignore_mia",
+          "text": "Mumble an apology and keep walking",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": -5, "character": "mia"}
+          ],
+          "next_scene": "homeroom"
+        }
+      ],
+      "events": [],
+      "tags": ["intro"],
+      "is_ending": false
+    },
+    "hallway_chat": {
+      "id": "hallway_chat",
+      "title": "The Hallway",
+      "background": "school_hallway",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": "mia",
+          "text": "Thanks. I'm Mia, by the way. Art club president, resident book-dropper.",
+          "portrait_mood": "happy"
+        },
+        {
+          "character": "mia",
+          "text": "You should watch out for Marcus — he runs the school paper and thinks he owns this hallway.",
+          "portrait_mood": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_about_mystery",
+          "text": "\"I heard something weird happened here last year?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "knows_rumor", "value": null},
+            {"type": "add_journal", "target": "The Rumor", "value": "Mia hinted that something strange happened at Ashford High last year."}
+          ],
+          "next_scene": "mia_hesitates"
+        },
+        {
+          "id": "ask_about_marcus",
+          "text": "\"What's Marcus's deal?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 5, "character": "mia"}
+          ],
+          "next_scene": "homeroom"
+        },
+        {
+          "id": "just_smile",
+          "text": "\"Nice to meet you, Mia.\" Just smile.",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "homeroom"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "mia_hesitates": {
+      "id": "mia_hesitates",
+      "title": "A Warning",
+      "background": "school_hallway",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": "mia",
+          "text": "...Where did you hear that?",
+          "portrait_mood": "surprised"
+        },
+        {
+          "character": "mia",
+          "text": "Look — just... don't go to the east wing after hours. Please.",
+          "portrait_mood": "sad"
+        }
+      ],
+      "choices": [
+        {
+          "id": "promise",
+          "text": "\"Okay, I promise.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 15, "character": "mia"}
+          ],
+          "next_scene": "homeroom"
+        },
+        {
+          "id": "press_further",
+          "text": "\"Why? What happened there?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "curious_about_east_wing", "value": null}
+          ],
+          "next_scene": "homeroom"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "homeroom": {
+      "id": "homeroom",
+      "title": "Homeroom",
+      "background": "classroom",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "You find a seat near the window. A sharp-dressed guy with a press badge leans over.",
+          "portrait_mood": null
+        },
+        {
+          "character": "marcus",
+          "text": "New kid. Marcus Chen. School paper. You're either a source or competition — which is it?",
+          "portrait_mood": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "id": "befriend_marcus",
+          "text": "\"Maybe I'll join the paper.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 10, "character": "marcus"},
+            {"type": "set_flag", "target": "joined_paper", "value": null}
+          ],
+          "next_scene": "after_school_crossroads"
+        },
+        {
+          "id": "dismiss_marcus",
+          "text": "\"Neither. Just a student.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": -5, "character": "marcus"}
+          ],
+          "next_scene": "after_school_crossroads"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "after_school_crossroads": {
+      "id": "after_school_crossroads",
+      "title": "After School",
+      "background": "school_courtyard",
+      "ambient_music": "ambient_dusk",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "The final bell rings. Students flood the halls. You pause at a crossroads — literally and figuratively.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "go_to_art_club",
+          "text": "Go to the art club room",
+          "conditions": [{"op": "knows", "target": "helped_mia", "value": null}],
+          "consequences": [],
+          "next_scene": "art_club"
+        },
+        {
+          "id": "investigate_east_wing",
+          "text": "Sneak into the east wing",
+          "conditions": [{"op": "knows", "target": "curious_about_east_wing", "value": null}],
+          "consequences": [
+            {"type": "add_journal", "target": "East Wing", "value": "I decided to investigate the forbidden east wing despite Mia's warning."}
+          ],
+          "next_scene": "east_wing"
+        },
+        {
+          "id": "find_marcus",
+          "text": "Look for Marcus at the paper office",
+          "conditions": [{"op": "knows", "target": "joined_paper", "value": null}],
+          "consequences": [],
+          "next_scene": "paper_office"
+        },
+        {
+          "id": "go_home",
+          "text": "Just go home",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "next_day"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "art_club": {
+      "id": "art_club",
+      "title": "Art Club",
+      "background": "art_room",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": "mia",
+          "text": "You came! Here, I'm working on something. Tell me what you think.",
+          "portrait_mood": "happy"
+        },
+        {
+          "character": null,
+          "text": "She shows you a painting — Ashford High at night, a light on in the east wing. Your eyes narrow.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "ask_about_painting",
+          "text": "\"Is that the east wing? Is the light...real?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "knows_east_wing_clue", "value": null},
+            {"type": "add_journal", "target": "The Painting", "value": "Mia painted the east wing at night with a mysterious light in the window. She seemed troubled by it."}
+          ],
+          "next_scene": "mia_confession"
+        },
+        {
+          "id": "compliment_art",
+          "text": "\"It's beautiful. You're really talented.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 10, "character": "mia"}
+          ],
+          "next_scene": "next_day"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "mia_confession": {
+      "id": "mia_confession",
+      "title": "Mia's Secret",
+      "background": "art_room",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": "mia",
+          "text": "...My brother disappeared there. Six months ago. The school says he just transferred. But I know he didn't.",
+          "portrait_mood": "sad"
+        },
+        {
+          "character": "mia",
+          "text": "I keep painting it because... I don't know. It helps me remember he was real.",
+          "portrait_mood": "sad"
+        }
+      ],
+      "choices": [
+        {
+          "id": "offer_help",
+          "text": "\"I'll help you find out what happened.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 20, "character": "mia"},
+            {"type": "set_flag", "target": "investigating_with_mia", "value": null},
+            {"type": "add_item", "target": "mia_trust"}
+          ],
+          "next_scene": "investigation_begins"
+        },
+        {
+          "id": "stay_out",
+          "text": "\"I'm sorry, Mia. That's really hard.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 5, "character": "mia"}
+          ],
+          "next_scene": "next_day"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "east_wing": {
+      "id": "east_wing",
+      "title": "The East Wing",
+      "background": "dark_corridor",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "The east wing is locked — but a maintenance door is ajar. Inside: dust, old lockers, and a strange smell of chemicals.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "You find a crumpled note: 'Lab 7. Don't let them find you. — E'",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "keep_note",
+          "text": "Take the note",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_item", "target": "mysterious_note"},
+            {"type": "add_journal", "target": "The Note", "value": "Found in the east wing: 'Lab 7. Don't let them find you. — E'"}
+          ],
+          "next_scene": "caught_by_marcus"
+        },
+        {
+          "id": "leave_note",
+          "text": "Leave it and get out",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "next_day"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "caught_by_marcus": {
+      "id": "caught_by_marcus",
+      "title": "Caught",
+      "background": "dark_corridor",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": "marcus",
+          "text": "Thought I'd find someone here eventually. You found something, didn't you?",
+          "portrait_mood": "neutral"
+        },
+        {
+          "character": "marcus",
+          "text": "I've been investigating what happened to Ethan Choi for three months. If you've found a lead — we should work together.",
+          "portrait_mood": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "id": "team_with_marcus",
+          "text": "\"Ethan Choi — Mia's brother?\" Show him the note.",
+          "conditions": [{"op": "has", "target": "mysterious_note", "value": null}],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 20, "character": "marcus"},
+            {"type": "set_flag", "target": "investigating_with_marcus", "value": null}
+          ],
+          "next_scene": "investigation_begins"
+        },
+        {
+          "id": "keep_secret",
+          "text": "\"I don't know what you're talking about.\"",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "next_day"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "paper_office": {
+      "id": "paper_office",
+      "title": "The Paper Office",
+      "background": "office_room",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": "marcus",
+          "text": "Good, you're here. I have a story that needs a second pair of eyes. A student vanished — school covered it up.",
+          "portrait_mood": "neutral"
+        },
+        {
+          "character": "marcus",
+          "text": "I need someone they won't suspect yet. You're new — perfect.",
+          "portrait_mood": "neutral"
+        }
+      ],
+      "choices": [
+        {
+          "id": "agree_to_investigate",
+          "text": "\"I'm in. What do we know?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "investigating_with_marcus", "value": null},
+            {"type": "add_relationship", "target": "trust", "value": 15, "character": "marcus"}
+          ],
+          "next_scene": "investigation_begins"
+        },
+        {
+          "id": "decline_investigation",
+          "text": "\"This sounds dangerous. Count me out.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": -10, "character": "marcus"}
+          ],
+          "next_scene": "next_day"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "investigation_begins": {
+      "id": "investigation_begins",
+      "title": "Lab 7",
+      "background": "science_lab",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Lab 7. Hidden behind a false wall in the east wing. Rows of files. Photos. A student ID: Ethan Choi, Grade 11.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "And something else — a audio recorder. You hit play.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "Ethan's voice: 'If you're hearing this — find the principal's files. He didn't make me transfer. He made me disappear.'",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "go_to_principal",
+          "text": "Confront the principal directly",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_journal", "target": "Ethan's Message", "value": "Ethan left a recording. The principal was responsible for his disappearance."}
+          ],
+          "next_scene": "principal_confrontation"
+        },
+        {
+          "id": "get_proof_first",
+          "text": "Find more evidence first",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_item", "target": "ethan_recording"},
+            {"type": "add_journal", "target": "Ethan's Message", "value": "Ethan left a recording. The principal was responsible for his disappearance."}
+          ],
+          "next_scene": "gather_evidence"
+        }
+      ],
+      "events": [],
+      "tags": ["investigation"],
+      "is_ending": false
+    },
+    "next_day": {
+      "id": "next_day",
+      "title": "The Next Day",
+      "background": "classroom",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Days pass. The mystery of the east wing lingers, but life at Ashford High continues.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "You see Mia in the hallway. She looks like she hasn't slept.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "check_in_mia",
+          "text": "Check in with Mia",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 5, "character": "mia"}
+          ],
+          "next_scene": "mia_breaking_point"
+        },
+        {
+          "id": "ignore_and_study",
+          "text": "Keep your head down and study",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "quiet_ending"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "gather_evidence": {
+      "id": "gather_evidence",
+      "title": "Building the Case",
+      "background": "library",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Library records. Transfer paperwork with forged signatures. A memo from the principal to someone called 'The Board.'",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "Ethan wasn't the first. Two others — same story, same paperwork.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "take_to_press",
+          "text": "Give everything to Marcus and the school paper",
+          "conditions": [{"op": "knows", "target": "investigating_with_marcus", "value": null}],
+          "consequences": [
+            {"type": "add_item", "target": "evidence_folder"},
+            {"type": "set_flag", "target": "chose_press", "value": null}
+          ],
+          "next_scene": "press_ending"
+        },
+        {
+          "id": "confront_principal_with_proof",
+          "text": "Confront the principal with all the evidence",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_item", "target": "evidence_folder"},
+            {"type": "set_flag", "target": "has_full_evidence", "value": null}
+          ],
+          "next_scene": "principal_confrontation"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "mia_breaking_point": {
+      "id": "mia_breaking_point",
+      "title": "Mia's Breaking Point",
+      "background": "school_hallway",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": "mia",
+          "text": "I got a text last night. Blocked number. It just said 'stop looking.' I think... I think they know.",
+          "portrait_mood": "sad"
+        }
+      ],
+      "choices": [
+        {
+          "id": "stand_with_mia",
+          "text": "\"We don't stop. Whatever it takes.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 20, "character": "mia"},
+            {"type": "set_flag", "target": "stand_with_mia", "value": null}
+          ],
+          "next_scene": "final_confrontation"
+        },
+        {
+          "id": "advise_stop",
+          "text": "\"Maybe we should listen. Stay safe.\"",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "quiet_ending"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "principal_confrontation": {
+      "id": "principal_confrontation",
+      "title": "The Principal's Office",
+      "background": "office_room",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Principal Holt looks up — unsurprised. Like he expected this.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "\"You children always think you're so clever,\" he says, reaching for his phone.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "bluff_without_proof",
+          "text": "\"We know everything. And so does the press.\"",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "final_confrontation"
+        },
+        {
+          "id": "show_evidence",
+          "text": "Slam the evidence folder on his desk",
+          "conditions": [{"op": "has", "target": "evidence_folder", "value": null}],
+          "consequences": [
+            {"type": "set_flag", "target": "exposed_principal", "value": null}
+          ],
+          "next_scene": "final_confrontation"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "final_confrontation": {
+      "id": "final_confrontation",
+      "title": "Everything on the Line",
+      "background": "school_entrance",
+      "ambient_music": "ambient_tense",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Police. Reporters. Parents. The school's front entrance is chaos.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "Marcus published the story. Mia stands beside you, trembling.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "speak_publicly",
+          "text": "Step forward and speak to the reporters",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "spoke_publicly", "value": null}
+          ],
+          "next_scene": "truth_ending"
+        },
+        {
+          "id": "stay_back_with_mia",
+          "text": "Stay back. Hold Mia's hand.",
+          "conditions": [{"op": "knows", "target": "stand_with_mia", "value": null}],
+          "consequences": [],
+          "next_scene": "romance_ending"
+        },
+        {
+          "id": "let_marcus_handle",
+          "text": "Let Marcus handle it — it's his story",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "truth_ending"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "press_ending": {
+      "id": "press_ending",
+      "title": "The Story Breaks",
+      "background": "school_entrance",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Marcus's article runs in the city paper — shared ten thousand times overnight.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "Three days later, Ethan Choi comes home. He looks older. But he's alive.",
+          "portrait_mood": null
+        },
+        {
+          "character": "marcus",
+          "text": "We did it. This is what journalism is supposed to be.",
+          "portrait_mood": "happy"
+        },
+        {
+          "character": null,
+          "text": "You smile. Ashford High will never be the same. Neither will you.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending"],
+      "is_ending": true
+    },
+    "truth_ending": {
+      "id": "truth_ending",
+      "title": "The Truth Wins",
+      "background": "school_entrance",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "The board of education launches an investigation. Principal Holt resigns by Friday.",
+          "portrait_mood": null
+        },
+        {
+          "character": "mia",
+          "text": "They found him. He's okay. He's coming home.",
+          "portrait_mood": "happy"
+        },
+        {
+          "character": null,
+          "text": "She hugs you. You don't pull away. Some mysteries are worth solving.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending"],
+      "is_ending": true
+    },
+    "romance_ending": {
+      "id": "romance_ending",
+      "title": "Together",
+      "background": "school_courtyard",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": "mia",
+          "text": "You didn't have to stay. But you did.",
+          "portrait_mood": "happy"
+        },
+        {
+          "character": null,
+          "text": "The chaos fades. The truth comes out — it always does, eventually. But right now, it's just the two of you.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "Ashford High's darkest secret is finally in the light. And you found something unexpected along the way.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending", "romance"],
+      "is_ending": true
+    },
+    "quiet_ending": {
+      "id": "quiet_ending",
+      "title": "A Quiet Year",
+      "background": "classroom",
+      "ambient_music": "ambient_soft",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "You chose to keep your distance from the mystery. Sometimes that's the smart call.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "Marcus breaks the story alone. Ethan comes home. You see Mia smile for the first time.",
+          "portrait_mood": null
+        },
+        {
+          "character": null,
+          "text": "You wonder, sometimes, what would have happened if you'd stepped in. But Ashford High is a story that keeps going.",
+          "portrait_mood": null
+        }
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending"],
+      "is_ending": true
+    }
+  },
+  "characters": {
+    "mia": {
+      "id": "mia",
+      "name": "Mia Choi",
+      "description": "Art club president. Passionate, warm-hearted, hiding a painful secret about her missing brother.",
+      "traits": [
+        {"name": "personality", "value": "creative and empathetic"},
+        {"name": "role", "value": "potential love interest and mystery anchor"}
+      ],
+      "portrait": "mia",
+      "initial_relationships": {"trust": 0, "affection": 0}
+    },
+    "marcus": {
+      "id": "marcus",
+      "name": "Marcus Chen",
+      "description": "School paper editor. Sharp, ambitious, driven by a genuine desire to expose the truth.",
+      "traits": [
+        {"name": "personality", "value": "analytical and determined"},
+        {"name": "role", "value": "investigative partner"}
+      ],
+      "portrait": "marcus",
+      "initial_relationships": {"trust": 0}
+    }
+  },
+  "systems": {
+    "initial_flags": {},
+    "initial_variables": {"reputation": 0},
+    "initial_inventory": [],
+    "resource_definitions": {
+      "reputation": {"label": "Reputation", "min": -100, "max": 100}
+    }
+  },
+  "metadata": {
+    "genre": "mystery-romance",
+    "tags": ["school", "mystery", "romance", "investigation"],
+    "generated_by": "PYR Demo"
+  }
+}

@@ -1,0 +1,615 @@
+{
+  "title": "Dead Drop: Chicago 1928",
+  "description": "A noir detective story in Prohibition-era Chicago. A mob boss hires you to find stolen whiskey. You find murder, corruption, and a woman playing everyone.",
+  "author": "PYR",
+  "version": "1.0",
+  "start_scene": "office",
+  "scenes": {
+    "office": {
+      "id": "office",
+      "title": "The Office, 2 A.M.",
+      "background": "detective_office",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "Chicago. 1928. The rain hits your window like a drunk hitting the pavement. You're Jack Malone — private detective, two months behind on rent.", "portrait_mood": null},
+        {"character": null, "text": "The door opens without a knock. A man in an expensive suit sets a briefcase on your desk. He doesn't sit.", "portrait_mood": null},
+        {"character": null, "text": "\"Mr. Moretti wants a word. Tonight. Casa del Lago. Don't be late.\"", "portrait_mood": null},
+        {"character": null, "text": "He's gone before you can ask questions. The briefcase has five hundred dollars in it. Half up front.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "go_armed",
+          "text": "Strap on your .38 and head out",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_item", "target": "revolver"},
+            {"type": "set_var", "target": "money", "value": 500}
+          ],
+          "next_scene": "moretti_restaurant"
+        },
+        {
+          "id": "go_clean",
+          "text": "Leave the gun. Walk in clean.",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_var", "target": "money", "value": 500},
+            {"type": "set_flag", "target": "went_unarmed"}
+          ],
+          "next_scene": "moretti_restaurant"
+        }
+      ],
+      "events": [],
+      "tags": ["intro"],
+      "is_ending": false
+    },
+    "moretti_restaurant": {
+      "id": "moretti_restaurant",
+      "title": "Casa del Lago",
+      "background": "restaurant_night",
+      "ambient_music": "jazz_upbeat",
+      "dialogue": [
+        {"character": null, "text": "Casa del Lago. The kind of place where the fish is fresh and the questions aren't welcome. Sal Moretti sits at the back booth like he owns the city — because he does.", "portrait_mood": null},
+        {"character": "sal_moretti", "text": "Malone. Sit down. You drink?", "portrait_mood": "neutral"},
+        {"character": "sal_moretti", "text": "Three nights ago, a shipment of my best Canadian rye went missing. Forty crates. Worth more than your life. I want to know who took it and where it is.", "portrait_mood": "neutral"},
+        {"character": "sal_moretti", "text": "You got one week. Find it, there's another five hundred. Don't find it... don't come back.", "portrait_mood": "angry"}
+      ],
+      "choices": [
+        {
+          "id": "ask_suspects",
+          "text": "\"Who knew about the shipment route?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "knows_insider_angle"},
+            {"type": "add_relationship", "target": "trust", "value": 5, "character": "sal_moretti"},
+            {"type": "add_journal", "target": "Moretti's List", "value": "Sal said only three people knew the shipment route: his enforcer Tommy, dock boss Gio Santini, and his girl Vera."}
+          ],
+          "next_scene": "dockside"
+        },
+        {
+          "id": "take_job_silent",
+          "text": "Nod. Pocket the address he slides across.",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 10, "character": "sal_moretti"}
+          ],
+          "next_scene": "dockside"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "dockside": {
+      "id": "dockside",
+      "title": "Pier 14, Lake Michigan",
+      "background": "docks_night",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "Pier 14. The fog rolls off Lake Michigan like smoke from a gun barrel. Longshoremen move crates by lantern, pretending not to see you.", "portrait_mood": null},
+        {"character": null, "text": "Gio Santini, the dock boss — a mountain of a man with very nervous eyes.", "portrait_mood": null},
+        {"character": "gio", "text": "I don't know nothing. Crates were there at midnight. Gone by four. Ask the North Siders.", "portrait_mood": "neutral"},
+        {"character": null, "text": "He shuts up fast. Like he said too much. The North Side Gang — Bugs Moran's outfit. Interesting.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "press_gio",
+          "text": "Push harder. \"What aren't you telling me, Gio?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "knows_tommy_at_docks"},
+            {"type": "add_var", "target": "heat", "value": 5},
+            {"type": "add_journal", "target": "Gio's Slip", "value": "Gio let it slip that Tommy Nicoletti — Moretti's own enforcer — was at the docks that night when he had no business being there."}
+          ],
+          "next_scene": "speakeasy"
+        },
+        {
+          "id": "north_side_lead",
+          "text": "\"North Siders. Got it.\" Let him go.",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "north_side_lead"}
+          ],
+          "next_scene": "speakeasy"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "speakeasy": {
+      "id": "speakeasy",
+      "title": "The Green Mill Cocktail Lounge",
+      "background": "speakeasy_interior",
+      "ambient_music": "jazz_lively",
+      "dialogue": [
+        {"character": null, "text": "The Green Mill. Even in Prohibition, the jazz never stops and the gin never runs out — if you know the right door.", "portrait_mood": null},
+        {"character": null, "text": "You nurse a drink at the bar. In this city, half the work is keeping your ears open.", "portrait_mood": null},
+        {"character": null, "text": "A woman sits alone at the far end. Silk dress, red lips, eyes that have seen too much. She catches you looking and doesn't look away.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "approach_woman",
+          "text": "Walk over and introduce yourself",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_relationship", "target": "trust", "value": 10, "character": "vera_hayes"}
+          ],
+          "next_scene": "vera_first_meeting"
+        },
+        {
+          "id": "find_brass",
+          "text": "Look for Detective Brass — you heard he drinks here",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "brass_encounter"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "vera_first_meeting": {
+      "id": "vera_first_meeting",
+      "title": "The Woman at the Bar",
+      "background": "speakeasy_interior",
+      "ambient_music": "jazz_lively",
+      "dialogue": [
+        {"character": "vera_hayes", "text": "You're looking for something. Men who wander into the Green Mill at midnight always are.", "portrait_mood": "neutral"},
+        {"character": "vera_hayes", "text": "Vera Hayes. And before you ask — yes, I know Sal Moretti. Everyone in this city knows Sal.", "portrait_mood": "neutral"},
+        {"character": null, "text": "She slides a matchbook across the bar. An address written inside. Her eyes say: come alone.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "pocket_matchbook",
+          "text": "Pocket it. \"I'll be there.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "vera_contact_made"},
+            {"type": "add_relationship", "target": "trust", "value": 15, "character": "vera_hayes"}
+          ],
+          "next_scene": "brass_encounter"
+        },
+        {
+          "id": "cautious_vera",
+          "text": "\"Why would I trust a stranger in a speakeasy?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "vera_contact_made"},
+            {"type": "add_relationship", "target": "trust", "value": 5, "character": "vera_hayes"}
+          ],
+          "next_scene": "brass_encounter"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "brass_encounter": {
+      "id": "brass_encounter",
+      "title": "Detective Brass",
+      "background": "speakeasy_back_room",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "Detective Eddie Brass finds you before you find him. A big man gone soft, badge on his belt like an apology.", "portrait_mood": null},
+        {"character": "detective_brass", "text": "Malone. Working Moretti's angle now? Smart move. Or maybe the dumbest one you've made.", "portrait_mood": "neutral"},
+        {"character": "detective_brass", "text": "Word of advice, free of charge. The whiskey's gone. Walk away before you become part of the mystery.", "portrait_mood": "angry"},
+        {"character": null, "text": "He sets cash on the bar between you. A bribe or a warning — in this city it's hard to tell the difference.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "take_brass_money",
+          "text": "Take the money. Play dumb.",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_var", "target": "money", "value": 200},
+            {"type": "set_flag", "target": "brass_bribed_you"},
+            {"type": "add_journal", "target": "Brass's Bribe", "value": "Detective Brass tried to buy me off the case. He's dirty and he's scared. Someone's got to him first."}
+          ],
+          "next_scene": "tommy_problem"
+        },
+        {
+          "id": "refuse_brass",
+          "text": "Leave the money on the bar. Walk away.",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "refused_brass"},
+            {"type": "add_var", "target": "heat", "value": 10},
+            {"type": "add_journal", "target": "Brass's Warning", "value": "Brass tried to pay me off. I refused. He'll be watching every move I make."}
+          ],
+          "next_scene": "tommy_problem"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "tommy_problem": {
+      "id": "tommy_problem",
+      "title": "Tommy's Gone",
+      "background": "chicago_street_rain",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "You try to find Tommy Nicoletti — Moretti's enforcer. His apartment is cold. His regular haunts don't remember him.", "portrait_mood": null},
+        {"character": null, "text": "Tommy Nicoletti has vanished. Just like the whiskey.", "portrait_mood": null},
+        {"character": null, "text": "You stand on a wet street corner at midnight. Two leads left.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "visit_vera",
+          "text": "Go to the address Vera gave you",
+          "conditions": [{"op": "knows", "target": "vera_contact_made"}],
+          "consequences": [],
+          "next_scene": "vera_apartment"
+        },
+        {
+          "id": "warehouse_tip",
+          "text": "Follow a tip about a warehouse on Cicero Avenue",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "warehouse_stakeout"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "vera_apartment": {
+      "id": "vera_apartment",
+      "title": "Vera's Place",
+      "background": "apartment_night",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": "vera_hayes", "text": "I was starting to think you weren't coming. Sit down. I'll pour you something that doesn't come in a teacup.", "portrait_mood": "happy"},
+        {"character": "vera_hayes", "text": "I know where the whiskey is, Malone. Because I helped move it.", "portrait_mood": "neutral"},
+        {"character": "vera_hayes", "text": "Sal's been skimming from the North Side arrangement for months. When they found out, they were going to kill him — and me, because I know where the money goes.", "portrait_mood": "sad"},
+        {"character": "vera_hayes", "text": "I gave the North Siders the shipment as a peace offering. Bought time. Tommy helped me set it up.", "portrait_mood": "sad"},
+        {"character": "vera_hayes", "text": "But Sal found out enough. Tommy is dead. And I'm next — unless someone changes the equation.", "portrait_mood": "sad"}
+      ],
+      "choices": [
+        {
+          "id": "believe_vera",
+          "text": "\"You're telling me Sal killed his own man.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "knows_vera_plan"},
+            {"type": "add_relationship", "target": "trust", "value": 20, "character": "vera_hayes"},
+            {"type": "add_journal", "target": "Vera's Confession", "value": "Vera moved the whiskey to the North Siders to stop a war. Sal killed Tommy when he found out. She's been playing everyone to survive."}
+          ],
+          "next_scene": "underground_vault"
+        },
+        {
+          "id": "skeptical_vera",
+          "text": "\"That's a good story. Where's your proof?\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "knows_vera_plan"},
+            {"type": "add_journal", "target": "Vera's Story", "value": "Vera claims she moved the whiskey to stop the North Siders from killing Sal — and her. She says Tommy is dead. I'm not sure who to trust."}
+          ],
+          "next_scene": "underground_vault"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "warehouse_stakeout": {
+      "id": "warehouse_stakeout",
+      "title": "Cicero Avenue Warehouse",
+      "background": "warehouse_night",
+      "ambient_music": "jazz_tense",
+      "dialogue": [
+        {"character": null, "text": "The warehouse on Cicero Avenue. A tip from a newsboy who recognized you as Moretti's man.", "portrait_mood": null},
+        {"character": null, "text": "You wait in the dark for two hours. Then headlights — four men unloading crates with Moretti's labels, handled by North Side muscle.", "portrait_mood": null},
+        {"character": null, "text": "The deal's already been made. And someone in the shadows is watching the whole thing.", "portrait_mood": null},
+        {"character": "tommy_nico", "text": "Put the piece away, Malone. You're in over your head.", "portrait_mood": "neutral"}
+      ],
+      "choices": [
+        {
+          "id": "hear_tommy_out",
+          "text": "\"Tommy Nicoletti. Everyone says you're dead.\"",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "tommy_alive"},
+            {"type": "add_journal", "target": "Tommy's Alive", "value": "Tommy Nicoletti faked his death. He's been protecting Vera — and he has Moretti's real account ledger."}
+          ],
+          "next_scene": "tommy_explains"
+        },
+        {
+          "id": "get_the_drop",
+          "text": "Get the upper hand. Force answers.",
+          "conditions": [{"op": "has", "target": "revolver"}],
+          "consequences": [
+            {"type": "add_var", "target": "heat", "value": 15},
+            {"type": "set_flag", "target": "tommy_alive"}
+          ],
+          "next_scene": "underground_vault"
+        },
+        {
+          "id": "observe_quietly",
+          "text": "Stay hidden. Watch and wait.",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "saw_exchange"}
+          ],
+          "next_scene": "underground_vault"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "tommy_explains": {
+      "id": "tommy_explains",
+      "title": "Tommy's Story",
+      "background": "warehouse_night",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": "tommy_nico", "text": "Sal's been running two sets of books for three years. Skimming from the North Side cut. When they found out, Vera came to me — move the shipment as a trade, or we're all in the river.", "portrait_mood": "neutral"},
+        {"character": "tommy_nico", "text": "I went along because I owe her. Don't ask why.", "portrait_mood": "sad"},
+        {"character": "tommy_nico", "text": "I've got Sal's real ledger. Every payoff, every murder order, every cop he owns. Brass is in there. Half the city council.", "portrait_mood": "neutral"},
+        {"character": null, "text": "He slides a leather book across the floor. The weight of Chicago in two hundred pages.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "take_ledger",
+          "text": "Take the ledger.",
+          "conditions": [],
+          "consequences": [
+            {"type": "add_item", "target": "morettis_ledger"},
+            {"type": "set_flag", "target": "has_ledger"},
+            {"type": "add_journal", "target": "The Ledger", "value": "Moretti's real account book. Every bribe, every murder, every bent cop in Chicago. Enough to burn the whole operation down."}
+          ],
+          "next_scene": "underground_vault"
+        },
+        {
+          "id": "leave_ledger",
+          "text": "\"Keep it. I just need the whiskey.\"",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "underground_vault"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "underground_vault": {
+      "id": "underground_vault",
+      "title": "Sub-Basement",
+      "background": "warehouse_vault",
+      "ambient_music": "jazz_tense",
+      "dialogue": [
+        {"character": null, "text": "Forty crates of Canadian rye, stacked floor to ceiling in a sub-basement beneath the warehouse. You found it.", "portrait_mood": null},
+        {"character": null, "text": "You also find a body. Detective Eddie Brass — two in the chest, slumped against the far wall.", "portrait_mood": null},
+        {"character": null, "text": "Someone cleaned up a loose end tonight. The city just got a little less corrupt and a lot more dangerous for you.", "portrait_mood": null},
+        {"character": null, "text": "You have everything now. The question is what Jack Malone does with it.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "call_moretti",
+          "text": "Call Moretti. Tell him you found the shipment.",
+          "conditions": [],
+          "consequences": [
+            {"type": "set_flag", "target": "told_moretti"},
+            {"type": "add_relationship", "target": "trust", "value": 10, "character": "sal_moretti"}
+          ],
+          "next_scene": "final_crossroads"
+        },
+        {
+          "id": "call_vera",
+          "text": "Call Vera first.",
+          "conditions": [{"op": "knows", "target": "knows_vera_plan"}],
+          "consequences": [
+            {"type": "set_flag", "target": "chose_vera"}
+          ],
+          "next_scene": "final_crossroads"
+        },
+        {
+          "id": "go_to_tribune",
+          "text": "Take the ledger straight to the Tribune.",
+          "conditions": [{"op": "has", "target": "morettis_ledger"}],
+          "consequences": [
+            {"type": "set_flag", "target": "chose_press"}
+          ],
+          "next_scene": "final_crossroads"
+        },
+        {
+          "id": "walk_away_now",
+          "text": "Leave it all. Walk out and don't stop.",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "final_crossroads"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "final_crossroads": {
+      "id": "final_crossroads",
+      "title": "The Last Play",
+      "background": "chicago_street_rain",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "Rain on wet Chicago streets. A dead cop in a basement. Forty crates of bootleg rye. A mob boss by the phone. A woman waiting somewhere in the dark.", "portrait_mood": null},
+        {"character": null, "text": "One night in this city taught you: everyone's running an angle. The only question is which angle is yours.", "portrait_mood": null}
+      ],
+      "choices": [
+        {
+          "id": "deliver_vera",
+          "text": "Give Vera up to Moretti. Collect your money. Walk away clean.",
+          "conditions": [{"op": "knows", "target": "told_moretti"}],
+          "consequences": [],
+          "next_scene": "ending_sold_out"
+        },
+        {
+          "id": "run_with_vera",
+          "text": "Find Vera. Leave Chicago tonight. Don't look back.",
+          "conditions": [{"op": "knows", "target": "knows_vera_plan"}],
+          "consequences": [],
+          "next_scene": "ending_escape"
+        },
+        {
+          "id": "burn_it_all",
+          "text": "Take the ledger to the Tribune. Burn the whole operation down.",
+          "conditions": [{"op": "has", "target": "morettis_ledger"}],
+          "consequences": [],
+          "next_scene": "ending_justice"
+        },
+        {
+          "id": "ghost_out",
+          "text": "Buy a one-way ticket west. Forget you were ever here.",
+          "conditions": [],
+          "consequences": [],
+          "next_scene": "ending_ghost"
+        }
+      ],
+      "events": [],
+      "tags": [],
+      "is_ending": false
+    },
+    "ending_sold_out": {
+      "id": "ending_sold_out",
+      "title": "Thirty Pieces",
+      "background": "restaurant_night",
+      "ambient_music": "jazz_slow",
+      "dialogue": [
+        {"character": null, "text": "Moretti pays you across the white tablecloth of Casa del Lago. A thousand dollars in a plain envelope.", "portrait_mood": null},
+        {"character": "sal_moretti", "text": "You're a practical man, Malone. I like practical men. Practical men live long lives in this city.", "portrait_mood": "neutral"},
+        {"character": null, "text": "Three days later, Vera Hayes disappears. The papers say nothing. They never do.", "portrait_mood": null},
+        {"character": null, "text": "You never sleep well again. But the rent is paid. The bottle stays full.", "portrait_mood": null},
+        {"character": null, "text": "Some detectives find the truth. You found out what truth is worth in Chicago.", "portrait_mood": null}
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending", "dark"],
+      "is_ending": true
+    },
+    "ending_escape": {
+      "id": "ending_escape",
+      "title": "The Lake Shore Limited",
+      "background": "train_station",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "Union Station. 4:15 A.M. Vera is already there — one suitcase, a hat pulled low, watching the platform.", "portrait_mood": null},
+        {"character": "vera_hayes", "text": "I didn't think you'd come.", "portrait_mood": "surprised"},
+        {"character": null, "text": "\"Didn't think I would either.\"", "portrait_mood": null},
+        {"character": null, "text": "The Lake Shore Limited pulls out at 4:22. By morning, Chicago is nothing but smoke on the eastern horizon.", "portrait_mood": null},
+        {"character": null, "text": "Sal Moretti will be looking. Maybe forever. But in this city, you were already as good as dead.", "portrait_mood": null},
+        {"character": null, "text": "At least now you're dead somewhere warm. And you're not alone.", "portrait_mood": null}
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending", "romance"],
+      "is_ending": true
+    },
+    "ending_justice": {
+      "id": "ending_justice",
+      "title": "Front Page",
+      "background": "newspaper_office",
+      "ambient_music": "jazz_upbeat",
+      "dialogue": [
+        {"character": null, "text": "The Chicago Tribune. November 14, 1928. The headline runs four columns wide.", "portrait_mood": null},
+        {"character": null, "text": "MOB BOSS MORETTI INDICTED — CITY-WIDE CORRUPTION EXPOSED", "portrait_mood": null},
+        {"character": null, "text": "Thirty-seven arrests. Twelve aldermen. Two judges. Detective Brass disgraced — posthumously.", "portrait_mood": null},
+        {"character": null, "text": "Sal Moretti is led from Casa del Lago in handcuffs. His pasta goes cold on the table.", "portrait_mood": null},
+        {"character": null, "text": "You never found Vera again. Sometimes you think that was the point all along.", "portrait_mood": null},
+        {"character": null, "text": "Jack Malone, private detective. Still behind on rent. But tonight, Chicago is one shade cleaner.", "portrait_mood": null}
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending", "justice"],
+      "is_ending": true
+    },
+    "ending_ghost": {
+      "id": "ending_ghost",
+      "title": "Westbound",
+      "background": "train_station",
+      "ambient_music": "jazz_melancholy",
+      "dialogue": [
+        {"character": null, "text": "You buy a ticket to Los Angeles. One way. Cash. The clerk doesn't look up.", "portrait_mood": null},
+        {"character": null, "text": "The whiskey stays in the vault. Brass stays on the floor. Moretti keeps running his city. Vera keeps running from hers.", "portrait_mood": null},
+        {"character": null, "text": "Some cases don't get solved. Some detectives know when to fold.", "portrait_mood": null},
+        {"character": null, "text": "By the time the train clears the city limits, you realize: you left Chicago, but Chicago didn't leave you.", "portrait_mood": null},
+        {"character": null, "text": "A private detective without a city is just a man with a gun and too many questions. But the questions get quieter, eventually.", "portrait_mood": null},
+        {"character": null, "text": "Eventually.", "portrait_mood": null}
+      ],
+      "choices": [],
+      "events": [],
+      "tags": ["ending", "bittersweet"],
+      "is_ending": true
+    }
+  },
+  "characters": {
+    "sal_moretti": {
+      "id": "sal_moretti",
+      "name": "Sal Moretti",
+      "description": "South Side mob boss. Runs Chicago with iron patience and sudden violence. Has never once raised his voice.",
+      "traits": [
+        {"name": "personality", "value": "calculating, patient, and absolutely ruthless"},
+        {"name": "role", "value": "client and primary antagonist"}
+      ],
+      "portrait": "sal_moretti",
+      "initial_relationships": {"trust": 0, "fear": 50}
+    },
+    "vera_hayes": {
+      "id": "vera_hayes",
+      "name": "Vera Hayes",
+      "description": "Moretti's girlfriend. Smarter than everyone in the room and surviving on it. Has been playing all sides for months.",
+      "traits": [
+        {"name": "personality", "value": "sharp, guarded, dangerously perceptive"},
+        {"name": "role", "value": "femme fatale and reluctant key to everything"}
+      ],
+      "portrait": "vera_hayes",
+      "initial_relationships": {"trust": 0, "affection": 0}
+    },
+    "detective_brass": {
+      "id": "detective_brass",
+      "name": "Det. Eddie Brass",
+      "description": "Chicago PD. Twenty years on the force, fifteen of them on Moretti's payroll. More afraid of losing his cut than his badge.",
+      "traits": [
+        {"name": "personality", "value": "corrupt, cowardly, and dangerous when cornered"},
+        {"name": "role", "value": "obstacle, warning, and eventual loose end"}
+      ],
+      "portrait": "detective_brass",
+      "initial_relationships": {"trust": -20}
+    },
+    "tommy_nico": {
+      "id": "tommy_nico",
+      "name": "Tommy 'Nico' Nicoletti",
+      "description": "Moretti's enforcer — supposedly dead. Quiet, dangerous, and unexpectedly loyal to the wrong person.",
+      "traits": [
+        {"name": "personality", "value": "stoic, precise, and stubbornly honorable"},
+        {"name": "role", "value": "wild card and keeper of the truth"}
+      ],
+      "portrait": "tommy_nico",
+      "initial_relationships": {"trust": 10}
+    },
+    "gio": {
+      "id": "gio",
+      "name": "Gio Santini",
+      "description": "Dock boss at Pier 14. Knows far more than he says and says far less than he should.",
+      "traits": [
+        {"name": "personality", "value": "nervous, evasive, and loyal to whoever scares him most"},
+        {"name": "role", "value": "first informant"}
+      ],
+      "portrait": null,
+      "initial_relationships": {"trust": 0}
+    }
+  },
+  "systems": {
+    "initial_flags": {},
+    "initial_variables": {"money": 0, "heat": 0},
+    "initial_inventory": [],
+    "resource_definitions": {
+      "money": {"label": "Dollars", "min": 0, "max": 9999},
+      "heat": {"label": "Police Heat", "min": 0, "max": 100}
+    }
+  },
+  "metadata": {
+    "genre": "noir-mystery",
+    "setting": "Chicago, 1928",
+    "tags": ["noir", "mystery", "prohibition", "mobster", "detective", "femme-fatale"],
+    "generated_by": "PYR / Claude Code"
+  }
+}
